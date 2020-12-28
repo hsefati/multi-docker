@@ -1,22 +1,23 @@
-language: generic
 sudo: required
+language: generic
+
 services:
-  - docker  
+  - docker
 
 before_install:
   - docker build -t hsefati/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true hsefati/react-test npm run test
+  - docker run -e CI=true hsefati/react-test npm test
 
 after_success:
-  - doccker build -t hsefati/multi-client ./client
-  - doccker build -t hsefati/multi-nginx ./nginx
-  - doccker build -t hsefati/multi-server ./server
-  - doccker build -t hsefati/multi-worker ./worker
-  # log in to the docker cli
+  - docker build -t hsefati/multi-client ./client
+  - docker build -t hsefati/multi-nginx ./nginx
+  - docker build -t hsefati/multi-server ./server
+  - docker build -t hsefati/multi-worker ./worker
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  # tkae those images and push them to docker hub
+  # Take those images and push them to docker hub
   - docker push hsefati/multi-client
   - docker push hsefati/multi-nginx
   - docker push hsefati/multi-server
