@@ -22,3 +22,15 @@ after_success:
   - docker push hsefati/multi-nginx
   - docker push hsefati/multi-server
   - docker push hsefati/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "MultiDocker-env-1"
+  bucket_name: "elasticbeanstalk-eu-central-1-0596894859455"
+  bucket_path: "multi-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
