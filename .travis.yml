@@ -17,7 +17,7 @@ after_success:
   # log in to the docker cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # tkae those images and push them to docker hub
-  - docker push hsefati/multi-docker-travis:multi-client
-  - docker push hsefati/multi-docker-travis:multi-nginx
-  - docker push hsefati/multi-docker-travis:multi-server
-  - docker push hsefati/multi-docker-travis:multi-worker
+  - docker push hsefati/multi-client
+  - docker push hsefati/multi-nginx
+  - docker push hsefati/multi-server
+  - docker push hsefati/multi-worker
